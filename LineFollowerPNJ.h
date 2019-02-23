@@ -152,3 +152,15 @@ void lineSensor::setSelector(byte n)
    digitalWrite(_s3, HIGH);
   }
 }
+
+class manuver
+{
+ private:
+	uint8_t pinDir1;
+	uint8_t pinPwm1;
+	uint8_t pinDir2;
+	uint8_t pinPwm2;
+ public:
+	manuver();
+};
+manuver :: manuver();
