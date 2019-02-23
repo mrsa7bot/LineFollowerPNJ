@@ -12,8 +12,6 @@
  *          
  * ========================================================
 */
-#ifndef LineFollowerPNJ_h
-#define LineFollowerPNJ_h
 
 #if ARDUINO >= 100
  #include "Arduino.h"
