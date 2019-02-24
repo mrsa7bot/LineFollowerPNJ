@@ -20,6 +20,7 @@
 #endif
 #include "EEPROM.h"
 
+
 class lineSensor
 { 
   private:
@@ -195,10 +196,10 @@ class manuver
   float PID(uint8_t error);
   void setConstPID(float kp, float ki, float kd);
   manuver(byte pinDir1, byte pinDir2 , byte pinPwm1, byte pinPwm2);
-  void setSpeed(byte s1, byte s2);
-  void lurus();
-  void kanan();
-  void kiri();
+  String setSpeed(byte s1, byte s2);
+  void lurus(byte error);
+  void kanan(byte error);
+  void kiri(byte error);
   void stop();
 };
 
@@ -207,23 +208,25 @@ manuver :: manuver(byte pinDir1, byte pinDir2 , byte pinPwm1, byte pinPwm2)
   _pinDir1 = pinDir1;
   _pinDir2 = pinDir2;
   _pinPwm1 = pinPwm1;
-  _pinPwm2 = pinPwm2;	
+  _pinPwm2 = pinPwm2;
+
   pinMode(_pinDir1, OUTPUT);
   pinMode(_pinDir2, OUTPUT);
   pinMode(_pinPwm1, OUTPUT);
   pinMode(_pinPwm2, OUTPUT);
 }
 
-void manuver :: setSpeed(byte s1, byte s2)
+String manuver :: setSpeed(byte s1, byte s2)
 { 
 	
 	EEPROM.write(11 ,s1);
 	EEPROM.write(12 ,s2);
 	speedM1  = EEPROM.read(11);
   	speedM2  = EEPROM.read(12); 
+	return speedM1 + "" + speedM2;
 }
 
-void manuver :: lurus()
+void manuver :: lurus(byte error)
 {
 	byte a = _pinDir1;
   	byte b = _pinDir2;
@@ -231,11 +234,11 @@ void manuver :: lurus()
  	byte d = _pinPwm2;
 	digitalWrite(a , HIGH);
 	digitalWrite(b , LOW);
-	analogWrite(c , speedM1);
-	analogWrite(d , speedM2);
+	analogWrite(c , speedM1 + PID(error));
+	analogWrite(d , speedM2 - PID(error));
 }
 
-void manuver :: kanan()
+void manuver :: kanan(byte error)
 {
 	byte a = _pinDir1;
   	byte b = _pinDir2;
@@ -244,11 +247,11 @@ void manuver :: kanan()
 
 	digitalWrite(a , HIGH);
 	digitalWrite(b , HIGH);
-	analogWrite(c , speedM1);
-	analogWrite(d , speedM2);
+	analogWrite(c , speedM1 + PID(error));
+	analogWrite(d , speedM2 - PID(error));
 }
 
-void manuver :: kiri()
+void manuver :: kiri(byte error)
 {
 	byte a = _pinDir1;
   	byte b = _pinDir2;
@@ -256,8 +259,8 @@ void manuver :: kiri()
  	byte d = _pinPwm2;
 	digitalWrite(a , LOW);
 	digitalWrite(b , LOW);
-	analogWrite(c , speedM1);
-	analogWrite(d , speedM2);
+	analogWrite(c , speedM1 + PID(error));
+	analogWrite(d , speedM2 - PID(error));
 }
 
 void manuver :: stop()
