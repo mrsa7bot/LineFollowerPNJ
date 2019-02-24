@@ -207,9 +207,7 @@ manuver :: manuver(byte pinDir1, byte pinDir2 , byte pinPwm1, byte pinPwm2)
   _pinDir1 = pinDir1;
   _pinDir2 = pinDir2;
   _pinPwm1 = pinPwm1;
-  _pinPwm2 = pinPwm2;
-  speedM1  = EEPROM.read(11);
-  speedM2  = EEPROM.read(12); 	
+  _pinPwm2 = pinPwm2;	
   pinMode(_pinDir1, OUTPUT);
   pinMode(_pinDir2, OUTPUT);
   pinMode(_pinPwm1, OUTPUT);
