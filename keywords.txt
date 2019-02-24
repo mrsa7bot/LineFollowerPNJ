@@ -6,10 +6,21 @@
 # Datatypes (KEYWORD1)
 #######################################
 
+
 lineSensor	KEYWORD1
 readLine	KEYWORD2
 setSelector	KEYWORD2
 scanLine	KEYWORD2
+errorLine	KEYWORD2
+
+manuver		KEYWORD1
+lurus		KEYWORD2
+kanan		KEYWORD2
+kiri		KEYWORD2
+stop		KEYWORD2
+PID	        KEYWORD2
+setConstPID	KEYWORD2
+setSpeed	KEYWORD2
 
 
 #######################################
