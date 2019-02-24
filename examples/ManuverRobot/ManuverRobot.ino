@@ -9,6 +9,7 @@ void setup()
 {
   //cara membaca sensor garis : instance.readLine; 
   Serial.begin(9600);
+  robot.setSpeed(100,100); //default speed M1 dan M2 = 100 walaupun ini tidak dipanggil : manuver.setSpeed(SpeedM1, SpeedM2);
 }
 
 void loop() {
