@@ -194,7 +194,7 @@ class manuver
  public:
   float PID(uint8_t error);
   void setConstPID(float kp, float ki, float kd);
-  manuver(byte pinDir1, byte pinDir2 , byte pinPwm1, byte pinPwm2,byte speed);
+  manuver(byte pinDir1, byte pinDir2 , byte pinPwm1, byte pinPwm2);
   void setSpeed(byte s1, byte s2);
   void lurus();
   void kanan();
