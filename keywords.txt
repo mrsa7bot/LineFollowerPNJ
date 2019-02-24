@@ -12,6 +12,11 @@ readLine	KEYWORD2
 setSelector	KEYWORD2
 scanLine	KEYWORD2
 errorLine	KEYWORD2
+i		LITERAL1
+s1		LITERAL1
+s2		LITERAL1
+s3		LITERAL1
+adc		LITERAL1
 
 manuver		KEYWORD1
 lurus		KEYWORD2
@@ -21,7 +26,25 @@ stop		KEYWORD2
 PID	        KEYWORD2
 setConstPID	KEYWORD2
 setSpeed	KEYWORD2
+error		LITERAL1
+s1		LITERAL1
+s2		LITERAL1
+kp		LITERAL1
+ki		LITERAL1
+kd		LITERAL1
+pinDir1		LITERAL1
+pinDir2		LITERAL1
+pinPwm1		LITERAL1
+pinPwm2		LITERAL1
 
+Button		KEYWORD1
+flagButton	KEYWORD2
+countDwButton	KEYWORD2
+countUpButton	KEYWORD2
+setMaxCount	KEYWORD2
+readState       KEYWORD2
+readState	KEYWORD2
+max		LITERAL1
 
 #######################################
 # Methods and Functions (KEYWORD2)

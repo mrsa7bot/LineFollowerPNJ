@@ -297,3 +297,81 @@ float manuver :: PID(byte error)
   	previousError = error;
 	return PIDvalue;
 }
+
+
+
+class Button
+{
+	private :
+		byte _pin;
+		String _mode = "";
+		bool flag = 1;
+		byte count= 0;
+		int buttonState = 0;         // current state of the button
+		int lastButtonState = 0;     // previous state of the button
+		unsigned long last = 0;
+		byte _max = 100;
+	public:	
+
+		Button(byte pin)
+		{
+			_pin  = pin; 
+			pinMode(_pin,INPUT);
+		}
+	
+		Button(byte pin, String mode)
+		{
+			_pin  = pin;
+			_mode = mode;
+			_mode!=""? pinMode(_pin,INPUT_PULLUP):pinMode(_pin, INPUT);							;
+		}
+		bool flagButton();
+		byte countDwButton();
+		byte countUpButton();
+		void setMaxCount(byte max);
+		bool readState();
+		void resetFlag();
+};
+
+bool Button :: flagButton()
+{	
+	byte pin = _pin;
+	buttonState = digitalRead(pin);
+	buttonState != lastButtonState? ( millis()-last<50?(buttonState==HIGH? flag=0:flag=1 ):last=millis()) : lastButtonState = buttonState;
+	return flag;
+}
+
+byte Button :: countUpButton()
+{
+	byte pin = _pin;
+	buttonState = digitalRead(pin);
+	buttonState != lastButtonState? (millis()-last<50?(buttonState == HIGH? count++:count=count):last=millis()):lastButtonState = buttonState;
+	count<=_max? count=_max: count=count;
+	return count;
+}	
+
+byte Button :: countDwButton()
+{
+	byte pin = _pin;
+	buttonState = digitalRead(pin);
+	buttonState != lastButtonState? (millis()-last<50?(buttonState == HIGH? count--:count=count):last=millis()):lastButtonState = buttonState;
+	count<=0? count=0: count=count;
+	return count;
+}
+
+void Button :: setMaxCount(byte max)
+{
+	_max = max;
+}
+
+bool Button :: readState()
+{
+	byte pin = _pin;
+	buttonState = digitalRead(pin);
+	return buttonState;
+}
+
+void Button :: resetFlag()
+{
+	return flag=1;
+}
