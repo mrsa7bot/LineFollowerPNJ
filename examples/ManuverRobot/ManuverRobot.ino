@@ -36,7 +36,7 @@ void loop()
     //follow line 
     line.readLine();                //baca garis
     byte error = line.errorLine();  //baca nilai error sensor garis
-    robot.lurus(error);             //menggungakan PID dengan memasukan seperti ini contoh lain robot.kanan(error); atau robot.kanan(error);
+    robot.lurus(error);             //manuver menggunakan PID dengan memasukan seperti ini pada contoh lain robot.kanan(error); atau robot.kanan(error);
   }
 
   else 
