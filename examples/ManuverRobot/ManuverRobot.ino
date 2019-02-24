@@ -3,9 +3,9 @@
 
 //inisialisasi instance line dengan pin 2 = selector 1, pin 3 = selector 2, pin 3 = selector 3, pin A0 = adc
 lineSensor line(7,8,9,A0); 
+
+//inisialisasi instance robot dengan pin 10 = Dir1 , pin 11 = Dir2 , pin 12 = PWM1 , pin 13 = PWM2
 manuver    robot(10,11,12,13);
-
-
 
 float kp = 4;
 float ki = 2;
