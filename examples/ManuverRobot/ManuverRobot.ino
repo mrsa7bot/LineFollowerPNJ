@@ -1,24 +1,46 @@
 // include library
-
 #include <LineFollowerPNJ.h>;
 
-//inisialisasi instance manuver dengan pin 10 = directionM1 , pin 11 = directionM1 , pin 12 = PWM M1 3, pin 13 = PWM M2
+//inisialisasi instance line dengan pin 2 = selector 1, pin 3 = selector 2, pin 3 = selector 3, pin A0 = adc
+lineSensor line(7,8,9,A0); 
 manuver    robot(10,11,12,13);
+
+
+
+float kp = 4;
+float ki = 2;
+float kd = 0.1;
+byte  speedM1 = 100;
+byte  speedM2 = 100; 
+unsigned long lastTime = 0;
+unsigned long interval = 60000;
 
 void setup() 
 {
   //cara membaca sensor garis : instance.readLine; 
   Serial.begin(9600);
-  robot.setSpeed(100,100); //default speed M1 dan M2 = 100 walaupun ini tidak dipanggil : manuver.setSpeed(SpeedM1, SpeedM2);
+  
+  robot.setSpeed(speedM1,speedM2);
+  robot.setConstPID(kp,ki,kd);
+  
+  Serial.println("Membaca Garis \n \n");
+  line.scanLine(10000); //Scan Sensor Selama 10 detik
+  delay(1000);
 }
 
-void loop() {
-  robot.lurus();
-  delay(3000);
-  robot.kanan();
-  delay(3000);
-  robot.kiri();
-  delay(3000);
-  robot.stop;
-  delay(6000);
+void loop() 
+{
+  //follow line selama 60 detik
+  if(millis()- lastTime < interval)
+  {
+    //follow line 
+    line.readLine();                //baca garis
+    byte error = line.errorLine();  //baca nilai error sensor garis
+    robot.lurus(error);             //menggungakan PID dengan memasukan seperti ini contoh lain robot.kanan(error); atau robot.kanan(error);
+  }
+
+  else 
+  {
+   robot.stop();
+  } 
 }
